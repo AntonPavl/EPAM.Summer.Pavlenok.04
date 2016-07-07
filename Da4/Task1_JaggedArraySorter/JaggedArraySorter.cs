@@ -22,7 +22,7 @@ namespace Task1_JaggedArraySorter
 
         public enum SortOrder
         {
-            ACK,
+            ASK,
             DESC
         }
 
@@ -40,7 +40,7 @@ namespace Task1_JaggedArraySorter
         /// <param name="array">Array[][] with values</param>
         /// <param name="sortFun">Comparator from enum</param>
         /// <param name="order">DES - Descending, ACK - Ascending</param>
-        public static void Sorter(double[][] array, SortType sortFun = SortType.SUM, SortOrder order = SortOrder.ACK)
+        public static void Sorter(double[][] array, SortType sortFun = SortType.SUM, SortOrder order = SortOrder.ASK)
         {
             if (array == null) throw new ArgumentNullException();
             if (array.Length == 0) return;
