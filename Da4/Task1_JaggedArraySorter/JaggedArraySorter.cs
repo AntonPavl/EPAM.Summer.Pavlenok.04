@@ -29,9 +29,9 @@ namespace Task1_JaggedArraySorter
         private static Dictionary<SortType, Func<double[], double[], SortOrder, bool>> sortNavigator =
             new Dictionary<SortType, Func<double[], double[], SortOrder, bool>>()
         {
-            { SortType.SUM, (a,b,order) => ( order == SortOrder.ACK ? a.Sum() < b.Sum() : a.Sum() > b.Sum()) },
-            { SortType.MAX, (a,b,order) => ( order == SortOrder.ACK ? a.Max() < b.Max() : a.Max() > b.Max()) },
-            { SortType.MIN, (a,b,order) => ( order == SortOrder.ACK ? a.Min() < b.Min() : a.Min() > b.Min()) }
+            { SortType.SUM, (a,b,order) => ( order == SortOrder.DESC ? a.Sum() < b.Sum() : a.Sum() > b.Sum()) },
+            { SortType.MAX, (a,b,order) => ( order == SortOrder.DESC ? a.Max() < b.Max() : a.Max() > b.Max()) },
+            { SortType.MIN, (a,b,order) => ( order == SortOrder.DESC ? a.Min() < b.Min() : a.Min() > b.Min()) }
         };
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Task1_JaggedArraySorter
         /// </summary>
         /// <param name="array">Array[][] with values</param>
         /// <param name="sortFun">Comparator from enum</param>
-        /// <param name="inverse">true - Descending, false - Ascending</param>
+        /// <param name="order">DES - Descending, ACK - Ascending</param>
         public static void Sorter(double[][] array, SortType sortFun = SortType.SUM, SortOrder order = SortOrder.ACK)
         {
             if (array == null) throw new ArgumentNullException();
@@ -58,7 +58,7 @@ namespace Task1_JaggedArraySorter
         /// </summary>
         /// <param name="array">Array[][] with values</param>
         /// <param name="sortFun">Comparator</param>
-        /// <param name="inverse">true - Descending, false - Ascending</param>
+        /// <param name="order">DES - Descending, ACK - Ascending</param>
         public static void Sorter(double[][] array, Func<double[], double[], bool> sortFun)
         {
             if (array == null) throw new ArgumentNullException();
