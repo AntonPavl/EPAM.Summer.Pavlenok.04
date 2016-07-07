@@ -61,6 +61,11 @@ namespace Task1_JaggedArraySorter
         /// <param name="inverse">true - Descending, false - Ascending</param>
         public static void Sorter(double[][] array, Func<double[], double[], bool> sortFun)
         {
+            if (array == null) throw new ArgumentNullException();
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == null) throw new ArgumentNullException();
+            }
             Sort(array, sortFun);
         }
 
