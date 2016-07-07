@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1_JaggedArraySorter
 {
-    public class JaggedArraySorter
+    public static class JaggedArraySorter
     {
         /// <summary>
         /// SUMSSORT = sort by the sum of the elements in array[]
@@ -15,26 +15,23 @@ namespace Task1_JaggedArraySorter
         /// </summary>
         public enum SortType
         {
-            SUMSORT,
-            MAXELEMENTSSORT,
-            MINELEMENTSSORT
+            SUM,
+            MAX,
+            MIN
         }
 
-        private static Dictionary<SortType, Func<double[], double[], bool, bool>> sortNavigator =
-            new Dictionary<SortType, Func<double[], double[], bool, bool>>()
+        public enum SortOrder
         {
-                {
-                    SortType.SUMSORT,
-                    (a,b,inverse) => ( inverse ? a.Sum()<b.Sum() : a.Sum()>b.Sum())
-                },
-                 {
-                    SortType.MAXELEMENTSSORT,
-                    (a,b,inverse) => ( inverse ? a.Max()<b.Max() : a.Max()>b.Max())
-                },
-                 {
-                    SortType.MINELEMENTSSORT,
-                    (a,b,inverse) => ( inverse ? a.Min()<b.Min() : a.Min()>b.Min())
-                }
+            ACK,
+            DESC
+        }
+
+        private static Dictionary<SortType, Func<double[], double[], SortOrder, bool>> sortNavigator =
+            new Dictionary<SortType, Func<double[], double[], SortOrder, bool>>()
+        {
+            { SortType.SUM, (a,b,order) => ( order == SortOrder.ACK ? a.Sum() < b.Sum() : a.Sum() > b.Sum()) },
+            { SortType.MAX, (a,b,order) => ( order == SortOrder.ACK ? a.Max() < b.Max() : a.Max() > b.Max()) },
+            { SortType.MIN, (a,b,order) => ( order == SortOrder.ACK ? a.Min() < b.Min() : a.Min() > b.Min()) }
         };
 
         /// <summary>
@@ -43,14 +40,17 @@ namespace Task1_JaggedArraySorter
         /// <param name="array">Array[][] with values</param>
         /// <param name="sortFun">Comparator from enum</param>
         /// <param name="inverse">true - Descending, false - Ascending</param>
-        public static void Sorter(double[][] array, SortType sortFun= SortType.SUMSORT, bool inverse = false)
+        public static void Sorter(double[][] array, SortType sortFun = SortType.SUM, SortOrder order = SortOrder.ACK)
         {
             if (array == null) throw new ArgumentNullException();
+            if (array.Length == 0) return;
+
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == null) throw new ArgumentNullException();
             }
-            Sort(array, sortNavigator[sortFun], inverse);
+
+            Sort(array, sortNavigator[sortFun], order);
         }
 
         /// <summary>
@@ -62,28 +62,19 @@ namespace Task1_JaggedArraySorter
         public static void Sorter(double[][] array, Func<double[], double[], bool> sortFun)
         {
             if (array == null) throw new ArgumentNullException();
+            if (array.Length == 0) return;
+
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == null) throw new ArgumentNullException();
             }
+
             Sort(array, sortFun);
         }
 
-        private static void Sort(double[][] array,Func<double[],double[],bool,bool> compare,bool inverse)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                for (int j = 0; j < array.Length - 1; j++)
-                {
-                    if (compare(array[j],array[j+1],inverse))
-                    {
-                        double[] temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
-                    }
-                }
-            }
-        }
+        private static void Sort(double[][] array,Func<double[], double[], SortOrder, bool> compare, SortOrder order) => 
+            Sort(array, (a, b) => compare(a, b, order));
+
         private static void Sort(double[][] array, Func<double[], double[], bool> compare)
         {
             for (int i = 0; i < array.Length; i++)
@@ -91,13 +82,17 @@ namespace Task1_JaggedArraySorter
                 for (int j = 0; j < array.Length - 1; j++)
                 {
                     if (compare(array[j], array[j + 1]))
-                    {
-                        double[] temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
-                    }
+                        Swap(ref array[j], ref array[j + 1]);
                 }
             }
         }
+
+        private static void Swap(ref double[] a, ref double[] b)
+        {
+            double[] temp = a;
+            a = b;
+            b = temp;
+        }
+
     }
 }
