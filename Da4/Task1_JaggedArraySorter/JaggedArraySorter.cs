@@ -58,7 +58,7 @@ namespace Task1_JaggedArraySorter
         /// </summary>
         /// <param name="array">Array[][] with values</param>
         /// <param name="sortFun">Comparator</param>
-        /// <param name="order">DES - Descending, ACK - Ascending</param>
+        /// <param name="inverse">DES - Descending, ACK - Ascending</param>
         public static void Sorter(double[][] array, Func<double[], double[], bool> sortFun)
         {
             if (array == null) throw new ArgumentNullException();
@@ -82,12 +82,12 @@ namespace Task1_JaggedArraySorter
                 for (int j = 0; j < array.Length - 1; j++)
                 {
                     if (compare(array[j], array[j + 1]))
-                        Swap(ref array[j], ref array[j + 1]);
+                        Swap(array[j], array[j + 1]);
                 }
             }
         }
 
-        private static void Swap(ref double[] a, ref double[] b)
+        private static void Swap(double[] a, double[] b)
         {
             double[] temp = a;
             a = b;
