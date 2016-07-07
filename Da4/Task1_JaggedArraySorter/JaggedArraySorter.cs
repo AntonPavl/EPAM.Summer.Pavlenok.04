@@ -82,12 +82,12 @@ namespace Task1_JaggedArraySorter
                 for (int j = 0; j < array.Length - 1; j++)
                 {
                     if (compare(array[j], array[j + 1]))
-                        Swap(array[j], array[j + 1]);
-                }
+                        Swap(ref array[j], ref array[j + 1]);
+                }   
             }
         }
 
-        private static void Swap(double[] a, double[] b)
+        private static void Swap(ref double[] a, ref double[] b)
         {
             double[] temp = a;
             a = b;
