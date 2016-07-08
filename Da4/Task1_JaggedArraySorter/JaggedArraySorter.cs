@@ -9,9 +9,9 @@ namespace Task1_JaggedArraySorter
     public static class JaggedArraySorter
     {
         /// <summary>
-        /// SUMSSORT = sort by the sum of the elements in array[]
-        /// MAXELEMENTSSORT = sort by the maximum element in array[]
-        /// MINELEMENTSSORT = sort by the minimum element in array[]
+        /// SUM = sort by the sum of the elements in array[]
+        /// MAX = sort by the maximum element in array[]
+        /// MIN = sort by the minimum element in array[]
         /// </summary>
         public enum SortType
         {
@@ -22,7 +22,7 @@ namespace Task1_JaggedArraySorter
 
         public enum SortOrder
         {
-            ASK,
+            ASC,
             DESC
         }
 
@@ -39,8 +39,8 @@ namespace Task1_JaggedArraySorter
         /// </summary>
         /// <param name="array">Array[][] with values</param>
         /// <param name="sortFun">Comparator from enum</param>
-        /// <param name="order">DES - Descending, ACK - Ascending</param>
-        public static void Sorter(double[][] array, SortType sortFun = SortType.SUM, SortOrder order = SortOrder.ASK)
+        /// <param name="order">DES - Descending, ASC - Ascending</param>
+        public static void Sorter(double[][] array, SortType sortFun = SortType.SUM, SortOrder order = SortOrder.ASC)
         {
             if (array == null) throw new ArgumentNullException();
             if (array.Length == 0) return;
@@ -58,7 +58,7 @@ namespace Task1_JaggedArraySorter
         /// </summary>
         /// <param name="array">Array[][] with values</param>
         /// <param name="sortFun">Comparator</param>
-        /// <param name="inverse">DES - Descending, ACK - Ascending</param>
+        /// <param name="inverse">DES - Descending, ASC - Ascending</param>
         public static void Sorter(double[][] array, Func<double[], double[], bool> sortFun)
         {
             if (array == null) throw new ArgumentNullException();
