@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDelegateComparer.cs" />
     <Compile Include="JaggedArraySorter.cs" />
+    <Compile Include="JaggedArraySorterDay8.cs" />
     <Compile Include="JaggedArraySorterInterfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

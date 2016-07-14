@@ -139,7 +139,6 @@ namespace Task1_JaggedArraySorterNTests
             arr[0] = new double[] { 100, 200, 300 };
             arr[1] = new double[] { 10, 20 };
             arr[2] = null;
-            JaggedArraySorter.Sorter(arr, JaggedArraySorter.SortType.MIN);
             JaggedArraySorterInterfaces.Sorter(arr, new MinDesc());
 
         }
@@ -149,7 +148,7 @@ namespace Task1_JaggedArraySorterNTests
         public void JaggedArraySorter_ArrayD3Null_ArgumentNullExep()
         {
             double[][] arr = null;
-            JaggedArraySorter.Sorter(arr, JaggedArraySorter.SortType.MIN);
+            JaggedArraySorterInterfaces.Sorter(arr, new MinAsc());
 
         }
     }
