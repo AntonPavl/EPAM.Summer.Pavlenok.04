@@ -17,12 +17,12 @@ namespace Task1_JaggedArraySorter
         /// <param name="inverse">DES - Descending, ASC - Ascending</param>
         public static void Sorter(double[][] array, IComparer<double[]> comparator)
         {
-            if (array == null) throw new ArgumentNullException();
+            if (ReferenceEquals(array, null)) throw new ArgumentNullException();
             if (array.Length == 0) return;
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] == null) throw new ArgumentNullException();
+                if (ReferenceEquals(array[i],null)) throw new ArgumentNullException();
             }
 
             Sort(array, comparator);

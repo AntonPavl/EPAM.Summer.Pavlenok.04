@@ -21,7 +21,7 @@ namespace Task1_JaggedArraySorter
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] == null) throw new ArgumentNullException();
+                if (ReferenceEquals(array[i], null)) throw new ArgumentNullException();
             }
 
             Sort(array, sortFun);

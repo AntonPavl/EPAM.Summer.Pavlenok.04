@@ -8,6 +8,12 @@ namespace Task1_JaggedArraySorter
 {
     public static class JaggedArraySorterDay8
     {
+        /// <summary>
+        /// Sort arrays in array by the DelegateInInterfae comparator
+        /// </summary>
+        /// <param name="array">Array[][] with values</param>
+        /// <param name="delegate">delegate in interface</param>
+        /// <param name="comparator">Comparator</param>
         public static void Sorter(double[][] array, Func<double[],double[],int> @delegate, IDelegateComparer comparator)
         {
             if (ReferenceEquals(array, null) ||
@@ -19,7 +25,7 @@ namespace Task1_JaggedArraySorter
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] == null) throw new ArgumentNullException();
+                if (ReferenceEquals(array[i], null)) throw new ArgumentNullException();
             }
             Sort(array, @delegate,comparator);
         }
